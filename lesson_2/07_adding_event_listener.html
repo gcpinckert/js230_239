@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <title>Test Page</title>
+  <script>
+    function displayAlert(event) { // function responds to selected event
+      let message = document.getElementById('message').value; // get contents of textarea
+      alert(message); // display contents in alert box
+    }
+
+    // register displayAlert as an event listener
+    // we have to wait until the DOM is available to attach the listener to the appropriate node
+    document.addEventListener("DOMContentLoaded", () => {
+      // identify the element that will receive the event
+      let button = document.getElementById("alert");
+      button.addEventListener('click', displayAlert);
+    })
+  </script>
+</head>
+
+<body>
+  <textarea id="message"></textarea>
+  <button id="alert">Alert</button>
+</body>
+
+</html>

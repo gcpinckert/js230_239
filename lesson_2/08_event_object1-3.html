@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <title>Practice Problems</title>
+  <style>
+    .x {
+      position: absolute;
+      transform: rotate(45deg);
+      top: 20px;
+      left: 20px;
+    }
+
+    .x .horizontal {
+      width: 45px;
+      height: 5px;
+      position: absolute;
+      left: -20px;
+      background: red;
+    }
+
+    .x .vertical {
+      height: 45px;
+      width: 5px;
+      background: red;
+      position: absolute;
+      left: 0px;
+      top: -20px;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener('mousemove', event => {
+        let x = document.querySelector('.x');
+        x.style.left = String(event.pageX) + 'px';
+        x.style.top = String(event.pageY) + 'px';
+      });
+
+      document.addEventListener('keydown', event => {
+        let horizontalX = document.querySelector('.x .horizontal');
+        let verticalX = document.querySelector('.x .vertical');
+
+        if (event.key === 'b') {
+          horizontalX.style.background = 'blue';
+          verticalX.style.background = 'blue';
+        } else if (event.key === 'g') {
+          horizontalX.style.background = 'green';
+          verticalX.style.background = 'green';
+        } else if (event.key === 'r') {
+          horizontalX.style.background = 'red';
+          verticalX.style.background = 'red';
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="x">
+    <div class="horizontal"></div>
+    <div class="vertical"></div>
+  </div>
+</body>
+
+
+</html>
