@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exercise 3</title>
+  <script src="./javascripts/03.js"></script>
+  <link rel="stylesheet" href="./stylesheets/style.css"
+</head>
+
+<body>
+  <form id="new-staff" method="post" action="/api/staff_members" class="styled-form side-by-side">
+    <fieldset>
+      <dl>
+        <dt><label for="email">Email: </label></dt>
+        <dd><input type="text" id="email" name="email"></dd>
+
+        <dt><label for="name">Name: </label></dt>
+        <dd><input type="text" id="name" name="name"></dd>
+      </dl>
+    </fieldset>
+  </form>
+  <button id="submit" form="new-staff">Submit</button>
+
+</body>
+
+</html>
