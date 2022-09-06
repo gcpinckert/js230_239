@@ -23,6 +23,14 @@ a {
     myriad-pro, "Helvetica Neue", Helvetica, Roboto,
     Arial, sans-serif;
   padding: 1rem;
+  margin: 1rem;
+}
+
+/* Custom appearance for fieldset title */
+.styled-form p {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 /* Custom appearance for labels */
@@ -34,6 +42,8 @@ a {
 
 /* Custom appearance for input and select fields */
 .styled-form input[type="text"],
+.styled-form input[type="date"],
+.styled-form input[type="time"],
 .styled-form select {
   border: 1px solid #06c;
   border-radius: 4px;
@@ -44,7 +54,9 @@ a {
 }
 
 .side-by-side label,
-.side-by-side input[type="text"] {
+.side-by-side input[type="text"],
+.styled-form input[type="date"],
+.styled-form input[type="time"] {
   display: inline-block;
 }
 
@@ -87,4 +99,16 @@ a {
   padding: 15px;
   border-radius: 5px;
   box-shadow: none;
+  margin: 1rem;
+}
+
+#addSchedule {
+  background-color: #64adda;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: none;
+  margin: 1rem;
 }
