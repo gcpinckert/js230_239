@@ -102,6 +102,17 @@ a {
   margin: 1rem;
 }
 
+.submit {
+  background-color: #d74250;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: none;
+  margin: 1rem;
+}
+
 #addSchedule {
   background-color: #64adda;
   font-weight: bold;

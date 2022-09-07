@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exercise 5</title>
+  <script src="./javascripts/05.js"></script>
+  <link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Schedules</h1>
+  <form id="book-schedule" method="post" action="/api/bookings" class="styled-form side-by-side">
+    <dl>
+      <dt><label for="schedules">Available Schedules: </label></dt>
+      <dd><select name="schedules" id="select-schedules">
+        <option value="" disabled selected>Choose One</option>
+      </select></dd>
+
+      <dt><label for="email">Email: </label></dt>
+      <dd><input type="text" id="email" name="email"></dd>
+    </dl>
+    <button class="submit" form="book-schedule">Submit</button>
+  </form>
+  
+
+</body>
+
+</html>
