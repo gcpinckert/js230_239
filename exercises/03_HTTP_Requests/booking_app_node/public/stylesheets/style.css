@@ -33,11 +33,16 @@ a {
   line-height: 1.5rem;
 }
 
-/* Custom appearance for labels */
-.styled-form label {
+/* Custom appearance for labels and lists*/
+.styled-form label,
+.styled-list {
   font-weight: bold;
   line-height: 1.5rem;
   color: #d74250;
+}
+
+.styled-list {
+  font-size: 1rem;
 }
 
 /* Custom appearance for input and select fields */
