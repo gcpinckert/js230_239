@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Handlebars Tutorial</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script src="./10_handlebars_tutorial.js"></script>
+</head>
+
+<body>
+  <script id="productTemplate" type="text/x-handlebars">
+    <li>
+      <h3>{{name}}</h3>
+      <dl>
+        <dt>Quantity:</dt>
+        <dd>{{quantity}}</dd>
+        <dt>Price:</dt>
+        <dd>
+          ${{price}}
+          {{#if on_sale}}
+          <strong>SALE!</strong>
+          {{/if}}
+        </dd>
+      </dl>
+    </li>
+  </script>
+
+  <script id="productsList" type="text/x-handlebars">
+    {{#each items}}
+    {{> productTemplate}}
+    {{/each}}
+  </script>
+  <ul></ul>
+</body>
+
+</html>
