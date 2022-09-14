@@ -1,0 +1,43 @@
+html,
+body {
+  background: lightseagreen;
+  margin: 0;
+  padding: 25px 0;
+}
+
+main {
+  background: beige;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 20px;
+}
+
+h1 {
+  color: darkslategray;
+  font: normal 40px monospace;
+}
+
+fieldset {
+  border: none;
+  width: 100%;
+}
+
+input[type="number"] {
+  border: 1px solid lightseagreen;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font: normal 24px monospace;
+  height: 30px;
+  vertical-align: middle;
+  width: 80px;
+}
+
+input[type="submit"] {
+  background: lightseagreen;
+  border: 1px solid rgb(47, 97, 94);
+  border-radius: 5px;
+  height: 30px;
+  width:30px;
+}
