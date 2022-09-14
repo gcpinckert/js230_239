@@ -1,0 +1,35 @@
+nav ul {
+  background-color: powderblue;
+  list-style-type: none;
+  padding-left: 0;
+  width: 100%;
+  font-size: 0;
+}
+
+nav li {
+  display: inline-block;
+  color: darkslategray;
+  font-size: 1.25rem;
+  text-align: center;
+  width: 33.33%;
+}
+
+nav a {
+  box-sizing: border-box;
+  color: darkslategray;
+  display: inline-block;
+  line-height: 2.5;
+  padding: 0 10px;
+  text-decoration: none;
+  width: 100%;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: darkslategray;
+  color: powderblue;
+}
+
+/* div {
+  visibility: hidden;
+} */
