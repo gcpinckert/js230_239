@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Photo Gallery</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="photo_gallery.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="./photo_gallery.js"></script>
+</head>
+
+<body>
+  <main>
+    <h2>My Photo Gallery</h2>
+    <figure class="featured" data-img-id="1">
+      <img src="https://i.picsum.photos/id/75/1200/900.jpg?hmac=or7HQf4vG3MmH5vv2212-aFALgA00MaxJB-3mS83aII"
+        alt="grapes on the vine" />
+      <figcaption>Grapes on the Vine</figcaption>
+    </figure>
+    <figure class="featured hidden" data-img-id="2">
+      <img src="https://i.picsum.photos/id/796/1200/900.jpg?hmac=DSVG3I31fq5mkPcK7PdDv9IktJoFtYCC37D3IOZlw2c" alt="stones on the sand" />
+      <figcaption>Stones on the Sand</figcaption>
+    </figure>
+    <figure class="featured hidden" data-img-id="3">
+      <img src="https://i.picsum.photos/id/1062/1200/900.jpg?hmac=BmSwjmU0iRYTHm-p-Pt0VYDVPKoHYHEisjKipJ45w00"
+        alt="dog in blanket" />
+      <figcaption>Dog in a Blanket</figcaption>
+    </figure>
+    <figure class="featured hidden" data-img-id="4">
+      <img src="https://i.picsum.photos/id/598/1200/900.jpg?hmac=YAf9mkyIzBsTjUd3BhZj7jdYcXKY94F81vtUmCXhOQM"
+        alt="sailboat bow over water" />
+      <figcaption>Sailboat over Water</figcaption>
+    </figure>
+
+    <ul>
+      <li data-img-id="1" class="active"><img src="https://i.picsum.photos/id/75/1200/900.jpg?hmac=or7HQf4vG3MmH5vv2212-aFALgA00MaxJB-3mS83aII" alt="grapes on the vine" /></li>
+      <li data-img-id="2"><img src="https://i.picsum.photos/id/796/1200/900.jpg?hmac=DSVG3I31fq5mkPcK7PdDv9IktJoFtYCC37D3IOZlw2c" alt="stones on the sand" /></li>
+      <li data-img-id="3"><img src="https://i.picsum.photos/id/1062/1200/900.jpg?hmac=BmSwjmU0iRYTHm-p-Pt0VYDVPKoHYHEisjKipJ45w00" alt="dog in blanket" /></li>
+      <li data-img-id="4"><img src="https://i.picsum.photos/id/598/1200/900.jpg?hmac=YAf9mkyIzBsTjUd3BhZj7jdYcXKY94F81vtUmCXhOQM" alt="sailboat bow over water" /></li>
+    </ul>
+  </main>
+</body>
+
+</html>
