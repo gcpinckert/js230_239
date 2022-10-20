@@ -65,3 +65,108 @@ Within the click event listener, the first `console.log` statement will always l
 When using a function expression, the value of `this` within the callback provided to the event listener will have the element the listener was added to as it's value. It is equivalent to `event.currentTarget`.
 
 In the example above we use an arrow function for the callback, which takes it's execution context from it's surrounding scope. However, if we had used a function expression instead, `this` would reference the `div` element with the `id` of `container`.
+
+## Events Code Snippets
+
+```html
+<a href="/">
+  <button>View Page</button>
+</a>
+```
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('button').addEventListener('click', event => {
+    event.preventDefault();
+    alert('Following the link was prevented.');
+  });
+  
+  document.querySelector('a').addEventListener('click', event => {
+    alert('Click event on the anchor tag');
+  }, true);
+});
+```
+
+Above we have a `button` element nested within an `a` tag. Both elements have separate `click` event listeners registered to them. In the event listener registered on the `button` element, we invoke `event.preventDefault()` on the `event` object passed to the callback. This causes the default behavior of an event to be prevented. In this case, for the button click, there is no default behavior specified for the browser. However in the case of the second event listener, which is registered on an anchor element, there is.
+
+When a user clicks on an anchor element, the browser will automatically redirect them to the link listed as the `href` attribute of that element. In this case, this behavior is prevented by the invocation to `preventDefault()`, *even though* we are invoking `preventDefault()` in the handler registered on the `button` element.
+
+This occurs because default browser actions only take place once all the event handlers registered for the event in question have been processed (i.e. after event propagation is complete). Furthermore, we only have a *single event object* that is *passed by reference* into each callback that gets executed during the propagation process.
+
+In this case, when a user clicks the button, here is what occurs:
+
+- *Capturing phase* - beginning at `window` the browser moves down the DOM tree to the target element, checking each element node in turn for a registered event listener.
+- When the browser reaches the `a` element (parent of `button` target), it finds a registered event listener for the `click` event. The `useCapture` boolean flag argument of `addEventListener` is set to true, so the browser executes the callback. The text `'Click event on the anchor tag'` is displayed in an alert box.
+- The next element node is the `button` element, which is the event target, so the browser enters the *target phase*. It checks for a registered event listener for the `click` event, and finds one. It then passes the *single* `event` object into the callback where `preventDefault()` is called on it. Then the text `'Following the link was prevented'` is displayed in an alert box.
+- Next comes the *bubbling phase*. The browser goes back up the DOM tree to the root node (`window`), checking for any additional event handlers. There are none.
+- Once this is complete, the browser would normally undertake any default actions. However, `event.preventDefault()` was invoked in the event handler registered to the `button` element, so it does not.
+
+___
+
+```html
+<a href="/">
+  <button>View Page</button>
+</a>
+```
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('button').addEventListener('click', event => {
+    event.preventDefault();
+    alert('Following the link was prevented.');
+  });
+  
+  document.querySelector('a').addEventListener('click', event => {
+    event.stopPropagation();
+    alert('Click event on the anchor tag');
+  }, true);
+});
+```
+
+This example is similar to the previous example, with one major difference: in the `click` event listener registered on the `a` element, we invoke `event.stopPropagation()`. This causes the behavior to change radically.
+
+`event.stopPropagation()` is a method that can be called on the `event` object in order to stop the propagation process. In this case, it causes the `event` the browser to stop moving down the DOM tree during the capturing phase, and the event listener registered to the `button` element never gets called. Therefore, `event.preventDefault()` is not called. The browser, after executing the event listener registered to the anchor element, will therefore perform the default behavior of following the link specified in the `href` attribute, or `"/"` in this case. Here is how it works:
+
+- *Capturing phase* - beginning at `window` the browser moves down the DOM tree to the target element, checking each element node in turn for a registered event listener.
+- When the browser reaches the `a` element (parent of `button` target), it finds a registered event listener for the `click` event. The `useCapture` boolean flag argument of `addEventListener` is set to true, so the browser executes the callback.
+- `event.stopPropagation()` is invoked. This ends the propagation process at this point in the capturing phase.
+- The text `'Click event on the anchor tag'` is displayed in an alert box.
+- Since propagation has been stopped, the browser does not enter the target phase and the event listener registered on the `button` element is not invoked.
+- After propagation, the browser performs the default action of opening the link specified in the `href` attribute of the anchor element.
+
+___
+
+```html
+<body>
+  <div id="elem1">1
+    <div id="elem2">2
+      <div id="elem3">3
+        <div id="elem4">4
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+```
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  let elem4 = document.querySelector('#elem4');
+  let elem2 = document.querySelector('#elem2');
+  elem2.addEventListener('click', function(event) {
+    alert(this.id);
+  });
+  elem4.addEventListener('click', function(event) {
+    alert(this.id);
+  });
+});
+```
+
+This code demonstrates the capturing and bubbling phases of event propagation, as well as the execution context of callbacks executed when events are fired.
+
+We have two event listeners registered on separate `div` elements. One registered on `div#elem2` and another registered on `div#elem4`. There are a few different scenarios here that might take place.
+
+1. The user clicks on `div#elem1`. In this case, the browser moves down the DOM tree to the first `div`, and then back up. It encounters no event listeners, so nothing happens.
+2. The user clicks on `div#elem2`. In this case, the browser moves down the DOM tree to `div#elem2`. During the target phase, it encounters an event handler. This is executed, and the value of `this.id` is displayed in an alert box. `this` within an event handler refers to `event.currentTarget`, or the element upon which the listener was registered. Therefore, `'elem2'` is displayed in the alert box.
+3. The user clicks on `div#elem3`. This has the same behavior as the previous scenario. The browser moves down the DOM tree to `div#elem3`. When it encounters the event listener registered on `div#elem2` during the capturing phase, it does not execute the callback. This is because the `useCapture` argument of `true` has not been set, and the callback will be executed during the bubbling phase by default. It then moves down to `div#elem3`, no event listener is found. Going back up the DOM tree during the bubbling phase, it executes the callback registered on `div#elem2` when it reaches it.
+4. The user clicks on `div#elem4`. In this case, the browser moves all the way down to the innermost `div`. When it reaches the target phase, the event handler registered for `div#elem4` is executed. This displays the text `'elem4'` in an alert box for the same reason described in #2, above. During the bubbling phase, when the browser reaches `div#elem2`, it executes the associated handler. This causes an alert box with `div#elem2` to be shown.
